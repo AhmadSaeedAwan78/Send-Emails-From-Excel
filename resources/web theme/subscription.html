@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>history</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="subscription.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css"
+    />
+  </head>
+
+  <body id="body-pd" class="bg-light">
+    <div class="l-navbar" id="nav-bar">
+      <nav class="nav">
+        <header class="header" id="header">
+          <div class="header_toggle">
+            <i class="bx bx-menu" id="header-toggle"></i>
+          </div>
+          <div class="header_img">
+            <img src="https://i.imgur.com/hczKIze.jpg" alt="" />
+          </div>
+        </header>
+        <div>
+          <a href="#" class="nav_logo">
+            <div class="nav_logo-name">
+              <img
+                id="navLogo"
+                class="d-none"
+                src="dwayne-the-rock-.jpg"
+                alt="the rock"
+              />
+            </div>
+          </a>
+          <div class="nav_list">
+            <a href="email.html" class="py-2 nav_link">
+              <i class="bx bx-grid-alt nav_icon"></i>
+              <span class="nav_name">Email</span>
+            </a>
+            <a href="history.html" class="py-2 nav_link">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">History</span>
+            </a>
+            <a href="settings.html" class="py-2 nav_link">
+              <i class="bx bx-message-square-detail nav_icon"></i>
+              <span class="nav_name">Settings</span>
+            </a>
+            <a href="subscription.html" class="py-2 nav_link active">
+              <i class="bx bx-bookmark nav_icon"></i>
+              <span class="nav_name">Subscription</span>
+            </a>
+            <a href="login.html" class="nav_link py-2">
+              <i class="bx bx-log-out nav_icon"></i>
+              <span class="nav_name">SignOut</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- SUBSCRIPTION SECTION START -->
+    <section id="subscriptionSection" class="px-3 pt-3 pb-5 rounded mt-5">
+      <div class="col-md-12 mb-4">
+        <p class="h1 mb-5">Upgrade your membership</p>
+      </div>
+      <div
+        id="subscriptionCards"
+        class="d-flex mx-auto flex-column flex-md-row"
+      >
+        <div class="card mx-auto" style="max-width: 26rem; min-width: 10rem">
+          <div
+            style="height: 10px; background-color: rgb(255, 195, 195)"
+            class="w-100"
+          ></div>
+          <div class="card-body">
+            <p style="color: rgb(255, 195, 195)" class="card-text packageName">
+              Basic
+            </p>
+            <h1 class="card-title">$1.00</h1>
+            <p class="text-muted">Free</p>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name"
+                ><span id="begText">Up to 10</span> sell per month</span
+              >
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished fact</span>
+            </div>
+          </div>
+          <button
+            class="btn btn-outline-secondary mb-3 w-75 mx-auto"
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+          >
+            Cancel Subscription
+          </button>
+        </div>
+        <div class="card mx-auto" style="max-width: 26rem; min-width: 10rem">
+          <div
+            style="height: 10px; background-color: rgb(255, 130, 130)"
+            class="w-100"
+          ></div>
+          <div class="card-body">
+            <p style="color: red" class="card-text packageName">Rookie</p>
+            <h1 class="card-title">$1.99</h1>
+            <p class="text-muted">Free</p>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name"
+                ><span id="begText">Up to 10</span> sell per month</span
+              >
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished fact</span>
+            </div>
+          </div>
+          <a
+            href="#"
+            class="btn btn-primary mb-3 w-75 mx-auto"
+            onclick="document.getElementById('id01').style.display='block'"
+            >Subscribe</a
+          >
+        </div>
+        <div class="card mx-auto" style="max-width: 26rem; min-width: 10rem">
+          <div
+            style="height: 10px; background-color: rgb(255, 101, 101)"
+            class="w-100"
+          ></div>
+          <div class="card-body">
+            <p style="color: rgb(156, 147, 147)" class="card-text packageName">
+              All Star
+            </p>
+            <h1 class="card-title">$4.99</h1>
+            <p class="text-muted">Free</p>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name"
+                ><span id="begText">Up to 10</span> sell per month</span
+              >
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished fact</span>
+            </div>
+          </div>
+          <a
+            href="#"
+            onclick="document.getElementById('id01').style.display='block'"
+            style="width: auto"
+            class="btn btn-primary mb-3 w-75 mx-auto"
+            >Subscribe</a
+          >
+        </div>
+        <div class="card mx-auto" style="max-width: 26rem; min-width: 10rem">
+          <div
+            style="height: 10px; background-color: rgb(255, 32, 32)"
+            class="w-100"
+          ></div>
+          <div class="card-body">
+            <p style="color: rgb(36, 33, 33)" class="card-text packageName">
+              MVP
+            </p>
+            <h1 class="card-title">$9.99</h1>
+            <p class="text-muted">Free</p>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name"
+                ><span id="begText">Up to 10</span> sell per month</span
+              >
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished fact</span>
+            </div>
+          </div>
+          <a
+            href="#"
+            onclick="document.getElementById('id01').style.display='block'"
+            style="width: auto"
+            class="btn btn-primary mb-3 w-75 mx-auto"
+            >Subscribe</a
+          >
+        </div>
+        <div class="card mx-auto" style="max-width: 26rem; min-width: 10rem">
+          <div
+            style="height: 10px; background-color: rgb(107, 0, 0)"
+            class="w-100"
+          ></div>
+          <div class="card-body">
+            <p style="color: rgb(0, 0, 0)" class="card-text packageName">HOF</p>
+            <h1 class="card-title">$19.99</h1>
+            <p class="text-muted">Free</p>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name"
+                ><span id="begText">Up to 10</span> sell per month</span
+              >
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long</span>
+            </div>
+            <div class="my-3">
+              <i class="bx bx-user nav_icon"></i>
+              <span class="nav_name">It is a long stablished fact</span>
+            </div>
+          </div>
+          <button
+            onclick="document.getElementById('id01').style.display='block'"
+            class="btn btn-primary mb-3 w-75 mx-auto"
+          >
+            Subscribe
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-------Paypal login form popup modal------------->
+    <div id="id01" class="modal">
+      <form
+        id="paypalLoginForm"
+        class="modal-content animate p-4"
+        action="/login"
+        method="post"
+      >
+        <div class="imgcontainer d-none">
+          <img src="Login.jpg" alt="Avatar" class="avatar" style="width: 10%" />
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="Credentials"
+            id="paypal"
+            checked
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Paypal
+          </label>
+          <input
+            id="paypalData"
+            class="form-control"
+            id="email"
+            type="email"
+            placeholder="Enter Email"
+            name="email"
+            required
+          />
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="Credentials"
+            id="creditCard"
+          />
+          <label class="form-check-label" for="flexRadioDefault1">
+            Credit Card
+          </label>
+        </div>
+        <div id="creditCardData" class="container d-none">
+          <input
+            class="form-control"
+            id="cardNumber"
+            type="text"
+            placeholder="Card Number"
+            name="email"
+            required
+          />
+          <div class="row"></div>
+          <input
+            class="form-control col-md-6"
+            type="text"
+            placeholder="Expiry Date"
+            name="expiryDate"
+            required
+          />
+          <input
+            class="form-control col-md-6"
+            type="text"
+            placeholder="CSV"
+            name="csv"
+            required
+          />
+        </div>
+
+        <button id="paypalSubmitBtn" class="btn btn-primary mt-3" type="submit">
+          <b>Login</b>
+        </button>
+
+        <a
+          id="paypalCancelBtn"
+          type="button"
+          onclick="document.getElementById('id01').style.display='none'"
+          class=""
+        >
+          X
+        </a>
+      </form>
+    </div>
+    <!--Container Main end-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="index.js"></script>
+    <script src="subscription.js"></script>
+  </body>
+</html>
