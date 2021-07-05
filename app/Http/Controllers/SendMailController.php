@@ -6,24 +6,33 @@ namespace App\Http\Controllers;
 use App\Jobs\SendEmailJob;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\PackageSubscription;
 use App\Imports\excelEmail;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
-
+use Auth;
 class SendMailController extends Controller
 {
     //
 
         public function send_emails(){
-
+        if(Auth::user()->email_verified_at ==null)
+        {
+        return redirect('emailvarification');
+        }
+        else{
             return view('users.send_emails');
-
-
-
+        }
     }
     public function send_emails_job(Request $request){
-//            dd($request);
+
+            
+
+            if(Auth::user()->package_status==0){
+            return redirect('paymenttype');
+            }
+
         $this->validate($request,[
             'file' => 'required|mimes:xlsx',
             'receiver_file' => 'required|mimes:xlsx',

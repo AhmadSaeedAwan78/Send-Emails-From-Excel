@@ -15,7 +15,6 @@
 
     <title>Login</title>
 </head>
-
 <body>
 <!-- LOGIN SECTION CODE -->
 <section id="loginSection" class="d-md-none my-auto">
@@ -75,7 +74,7 @@
         <button id="loginBtn" type="submit" class="btn btn-primary">
             Login
         </button>
-        <div class="col-8 my-auto mt-4">Don't have an account?</div>
+        <div class="col-8 my-auto mt-4">Dont have an account?</div>
         <div class="col-4 my-auto mt-4">
             <a href="#" id="signupBtn" type="submit"> Sign Up </a>
         </div>
@@ -83,7 +82,7 @@
 </section>
 <!-- SIGN UP SECTION CODE -->
 <section id="signupSection" class="d-none d-md-none">
-    <form id="signupForm" class="row rounded p-4 mx-auto">
+    <form id="signupForm" action="{{ route('register') }}"  class="row rounded p-4 mx-auto">
         <div
             class="
             col-md-12
@@ -166,9 +165,10 @@
     <form
         id="paypalLoginForm"
         class="modal-content animate p-4 forgotForm"
-        action="/login"
+       action="{{ route('reset-password') }}"
         method="post"
     >
+    @csrf
         <div class="imgcontainer mx-auto">
             <p><strong>Forgot Password</strong></p>
         </div>
@@ -216,27 +216,18 @@
                 <li><i class="fab fa-linkedin-in"></i></li>
             </ul>
             <p>or use your email for registration</p>
-            <form>
+            <form action="{{ url('/signup') }}" method="post">
+            @csrf
                 <div class="row">
-                    <input
-                        class="col-md-6 border"
-                        type="text"
-                        id="name"
-                        placeholder="Name"
-                    />
-                    <input
-                        class="col-md-6 border"
-                        type="text"
-                        id="email"
-                        placeholder="Last Name"
-                    />
+                    <input class="col-md-6 border" type="text" id="name" required name="firstname" placeholder="First Name"/>
+                    <input class="col-md-6 border" type="text" id="email" name="lastname" placeholder="Last Name"/>
                 </div>
-                <input type="email" id="email" placeholder="Email" />
+                <input type="email" name="email" required id="email" placeholder="Email" />
                 <input type="text" id="email" placeholder="Instagram" />
-                <input type="text" id="email" placeholder="Mobile" />
+                <input type="number" name="mobile" id="email" placeholder="Mobile" />
 
-                <input type="password" id="password" placeholder="Password" />
-                <button class="btn green-btn">sign up</button>
+                <input type="password" required name="password" id="password" placeholder="Password" />
+                <button type="submit" class="btn green-btn">Sign up</button>
             </form>
         </div>
         <div style="margin-top: 6rem" class="sign-in-section active">
@@ -247,6 +238,18 @@
                 <li><i class="fab fa-linkedin-in"></i></li>
             </ul>
             <p>or use your email account</p>
+        
+       @if (Session::has('message'))
+          <div class="alert alert-success">
+               
+              {{ Session::get('message') }}</div>
+          @endif
+          
+            @if (Session::has('alert'))
+          <div class="alert alert-danger">
+                 {{ Session::get('alert') }}</div>
+          @endif
+
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 

@@ -72,7 +72,7 @@
                     <i class="bx bx-bookmark nav_icon"></i>
                     <span class="nav_name">Subscription</span>
                 </a>
-                <a href="login.html" class="nav_link py-2">
+                <a href="logout" class="nav_link py-2">
                     <i class="bx bx-log-out nav_icon"></i>
                     <span class="nav_name">SignOut</span>
                 </a>
