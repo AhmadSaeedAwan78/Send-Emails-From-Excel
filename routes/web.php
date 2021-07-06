@@ -34,6 +34,11 @@ use Illuminate\Support\Facades\Route;
     Route::get('/send-emails', 'SendMailController@send_emails')->name('send-emails');
     Route::post('/send-emails', 'SendMailController@send_emails_job')->name('send-emails-job');
     Route::get('/history', 'HistoryController@index')->name('show-history');
+    Route::get('/subscription', 'SettingController@subscription')->name('subscription');
+    Route::get('/settings', 'SettingController@settings')->name('settings');
+
+    Route::post('/update-setting', 'SettingController@update_setting')->name('update-setting');
+
 
     Route::get('/logout', function(){
         Auth::logout();
@@ -53,3 +58,13 @@ use Illuminate\Support\Facades\Route;
     Route::get('paypal', array('as' => 'status','uses' => 'PaypalController@getPaymentStatus',));
 });
 
+Route::group(['middleware' => ['is_admin']], function () {
+Route::get('users-list', 'AdminController@userslist');
+Route::get('delete-user/{id}', 'AdminController@deleteuser');
+Route::post('adduser', 'AdminController@add_users');
+Route::post('subbyadmin', 'AdminController@subbyadmin');
+Route::get('Cancelplan/{id}', 'AdminController@Cancelplan');
+
+
+
+});

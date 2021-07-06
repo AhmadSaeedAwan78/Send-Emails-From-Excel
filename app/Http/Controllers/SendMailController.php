@@ -14,9 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Auth;
 class SendMailController extends Controller
 {
-    //
-
-        public function send_emails(){
+    public function send_emails(){
         if(Auth::user()->email_verified_at ==null)
         {
         return redirect('emailvarification');
@@ -30,7 +28,7 @@ class SendMailController extends Controller
 
 
             if(Auth::user()->package_status==0){
-            return redirect('paymenttype');
+            return redirect('subscription');
             }
 
         $this->validate($request,[
@@ -61,7 +59,7 @@ class SendMailController extends Controller
         $path1 = request()->file('file')->store('temp');
         $path=storage_path('app').'/'.$path1;
         $emails =  Excel::toArray(new excelEmail, $path);
-//        dd($path);
+
         $file=$request->file('file');
         $filename = $file->getClientOriginalName();
         $ext=$file->getClientOriginalExtension();
@@ -147,7 +145,7 @@ class SendMailController extends Controller
         if($missing_entry_check == 'false'){
             return redirect()->back()->with('error' , 'Please Provide Proper Headers in Receiver File');
         }
-    dd('fghfghf');
+
         $recever_emails_array = array();
         $sender_emails_array = array();
 
@@ -167,7 +165,7 @@ class SendMailController extends Controller
         }
 //        dd($sender_emails_array);
         $job_id =uniqid();
-//        dd($sender_emails_array, $recever_emails_array);
+
         $total_sender_count = count($sender_emails_array)-1;
 
         DB::table('progress')->insert([
@@ -181,7 +179,7 @@ class SendMailController extends Controller
             'remaining_emails' =>count($recever_emails_array),
         ]);
 
-//    dd($recever_emails);
+
         foreach ($recever_emails_array as $recever_email){
 
             if($recever_email == null){

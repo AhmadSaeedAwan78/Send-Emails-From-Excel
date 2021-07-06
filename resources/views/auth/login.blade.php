@@ -155,7 +155,14 @@
                 placeholder="Your Email please!"
             />
         </div>
-
+        <div class="mb-2 col-md-12">
+            <label for="exampleInputEmail1" class="form-label">Image</label>
+            <input
+                type="file"
+                class="form-control"
+                id="exampleInputEmail1"
+            />
+        </div>
         <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
 </section>
@@ -210,41 +217,43 @@
     <div class="w60 active">
         <div class="new-account-section active">
             <h1>Create Account</h1>
-            <ul class="social-icons">
+            {{--  <ul class="social-icons">
                 <li><i class="fab fa-facebook-f"></i></li>
                 <li><i class="fab fa-google-plus-g"></i></li>
                 <li><i class="fab fa-linkedin-in"></i></li>
-            </ul>
-            <p>or use your email for registration</p>
-            <form action="{{ url('/signup') }}" method="post">
+            </ul>  --}}
+            {{--  <p>or use your email for registration</p>  --}}
+            <form action="{{ url('/signup') }}" method="post" enctype="multipart/form-data">
             @csrf
                 <div class="row">
                     <input class="col-md-6 border" type="text" id="name" required name="firstname" placeholder="First Name"/>
                     <input class="col-md-6 border" type="text" id="email" name="lastname" placeholder="Last Name"/>
                 </div>
                 <input type="email" name="email" required id="email" placeholder="Email" />
-                <input type="text" id="email" placeholder="Instagram" />
+                <input type="text" name="instagram" id="email" placeholder="Instagram" />
                 <input type="number" name="mobile" id="email" placeholder="Mobile" />
 
                 <input type="password" required name="password" id="password" placeholder="Password" />
+                <input type="file" required name="image" id="image"  />
+
                 <button type="submit" class="btn green-btn">Sign up</button>
             </form>
         </div>
         <div style="margin-top: 6rem" class="sign-in-section active">
-            <h1>Sign in to DesignersNest</h1>
-            <ul class="social-icons">
+            <h1>Sign in to Leballoo</h1>
+            {{--  <ul class="social-icons">
                 <li><i class="fab fa-facebook-f"></i></li>
                 <li><i class="fab fa-google-plus-g"></i></li>
                 <li><i class="fab fa-linkedin-in"></i></li>
-            </ul>
-            <p>or use your email account</p>
-        
+            </ul>  --}}
+            {{--  <p>or use your email account</p>  --}}
+
        @if (Session::has('message'))
           <div class="alert alert-success">
-               
+
               {{ Session::get('message') }}</div>
           @endif
-          
+
             @if (Session::has('alert'))
           <div class="alert alert-danger">
                  {{ Session::get('alert') }}</div>

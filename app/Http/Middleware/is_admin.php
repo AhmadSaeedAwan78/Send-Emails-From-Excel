@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class is_admin
@@ -15,6 +15,9 @@ class is_admin
      */
     public function handle($request, Closure $next)
     {
+        if(Auth::user()->is_admin !=1){
+            return redirect()->back();
+        }
         return $next($request);
     }
 }

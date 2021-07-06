@@ -3,8 +3,6 @@
 @section('content')
 
 
-
-
     <div class='pt-md-5'>
         <div class='col-md-3'></div>
         <div class='col-md-6 '>
@@ -14,8 +12,10 @@
                 data-stripe-publishable-key="pk_test_51J7cw6IGbfgby5YXwJO1pa4fmUQakZoeUyheNrnhh5e3mhYMAIn8ICWEXzBvGDAxkMn5EZubtQy0ufEtJmtKqdXX00TWaoflsa"
                 id="payment-form" method="POST">
                 {{ csrf_field() }}
-
-                <input type="hidden" name="amount" value="100">
+<?php
+    $amount=DB::table('package_subscriptions')->where('name','Monthly')->pluck('amount')->first();
+     ?>
+     <input type="hidden" name="amount" value="{{ $amount }}">
                 <div class='form-row'>
                     <div class='col-12 form-group required'>
                         <label class='control-label'>Name on Card</label> <input
@@ -54,10 +54,15 @@
                 <div class='form-row mt-4'>
                     <div class='col-md-12 text-center form-group'>
                         <button class=' btn btn-primary px-5 submit-button'
+<<<<<<< HEAD
                             type='submit' >Pay »</button>
                             <button class=' total px-5 btn btn-info'>
                             Total: <span class='amount'><strong>$</strong> {{DB::table('package_subscriptions')->where('name' , 'Monthly')->pluck('amount')->first()}}</span>
                         </button>
+=======
+                            type='submit' >Pay $ {{ $amount }}</button>
+
+>>>>>>> d3188d81e2ffb544914e9365bd1dd8fbdf3beebd
                     </div>
                 </div>
 
