@@ -13,6 +13,14 @@
                 </button>
             </div>
         @endif
+        @if(Session::has('error'))
+            <div class="alert alert-danger alert-dismissible fade show" style="width: 100%;" role="alert">
+                 {{ Session::get('error') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
     <!-- drag drop boxes -->
             <form class="row rounded" method="POST" action="{{ url('send-emails') }}"  enctype="multipart/form-data">
                 @csrf

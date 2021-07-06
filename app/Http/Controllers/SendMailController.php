@@ -27,7 +27,7 @@ class SendMailController extends Controller
     }
     public function send_emails_job(Request $request){
 
-            
+
 
             if(Auth::user()->package_status==0){
             return redirect('paymenttype');
@@ -83,7 +83,8 @@ class SendMailController extends Controller
         $receiver_file_name = $file_name;
         $destinationpath=public_path('files/');
         $file->move($destinationpath,$file_name);
-
+        $sec_check = 'false';
+        $missing_entry_check = 'true';
         if(empty($emails)){
             $ses_err_message.= 'Sender Excel File is empty;';
             Session::flash('error_message',  $ses_err_message);
@@ -96,7 +97,27 @@ class SendMailController extends Controller
         }
 
         $sender_emails = $emails[0];
+        $indexes = array_keys($sender_emails[0]);
+        if(  !in_array("emails", $indexes) )
+        {
+            $sec_check = 'true';
+            $missing_entry_check = 'false';
+        }
+        if(  !in_array("password", $indexes) )
+        {
+            $sec_check = 'true';
+            $missing_entry_check = 'false';
+        }
+        if( $sec_check == 'true'){
+            $missing_entry_check = 'false';
+        }
 
+
+        if($missing_entry_check == 'false'){
+           return redirect()->back()->with('error' , 'Please Provide Proper Headers in Sender File');
+        }
+
+//        dd($sender_emails);
         //reciever
         if(empty($reciever)){
             $ses_err_message.= 'Recever Excel File is empty;';
@@ -110,7 +131,23 @@ class SendMailController extends Controller
         }
 
         $recever_emails = $reciever[0];
+        $indexes = array_keys($recever_emails[0]);
+//        dd($indexes);
+        if(  !in_array("emails", $indexes) )
+        {
+            $sec_check = 'true';
+            $missing_entry_check = 'false';
+        }
 
+        if( $sec_check == 'true'){
+            $missing_entry_check = 'false';
+        }
+
+
+        if($missing_entry_check == 'false'){
+            return redirect()->back()->with('error' , 'Please Provide Proper Headers in Receiver File');
+        }
+    dd('fghfghf');
         $recever_emails_array = array();
         $sender_emails_array = array();
 
@@ -125,8 +162,10 @@ class SendMailController extends Controller
             if ($sender_email['emails'] == null) {
                 continue;
             }
-            $sender_emails_array[] =$sender_email['emails'];
+            array_push($sender_emails_array , array('email'=>$sender_email['emails'],'password'=>$sender_email['password']));
+//            $sender_emails_array[] =$sender_email['emails'];
         }
+//        dd($sender_emails_array);
         $job_id =uniqid();
 //        dd($sender_emails_array, $recever_emails_array);
         $total_sender_count = count($sender_emails_array)-1;
@@ -144,12 +183,16 @@ class SendMailController extends Controller
 
 //    dd($recever_emails);
         foreach ($recever_emails_array as $recever_email){
+
             if($recever_email == null){
                 continue;
             }
+              $i = rand(0,$total_sender_count);
+//            dd($sender_emails_array[rand(0,$total_sender_count)]);
             dispatch(new SendEmailJob(
                 $recever_email,
-                $sender_emails_array[rand(0,$total_sender_count)],
+                $sender_emails_array[$i]['email'],
+                $sender_emails_array[$i]['password'],
                 $request->subject,
                 $request->email_message,
                 $job_id

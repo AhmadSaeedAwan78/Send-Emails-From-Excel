@@ -46,9 +46,9 @@ return [
             'host' => 'smtp.gmail.com',
             'port' => 587,
             'encryption' => 'tls',
-            'username' =>'mannanmaan1425@gmail.com',
+            'username' =>'mannanmaan14255@gmail.com',
             'password' =>'mookjormpdmxlbty',
-        ],
+            ],
 
         'ses' => [
             'transport' => 'ses',

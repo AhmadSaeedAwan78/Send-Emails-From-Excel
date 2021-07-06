@@ -12,6 +12,8 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Livewire\Processing as processing_class;
+use Swift_Mailer;
+use Swift_SmtpTransport;
 
 
 class SendEmailJob implements ShouldQueue
@@ -23,6 +25,7 @@ class SendEmailJob implements ShouldQueue
     public $subject;
     public $email_message;
     public $job_id;
+    public $sender_password;
 
 
     /**
@@ -30,10 +33,12 @@ class SendEmailJob implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($recever_email , $sender_email, $subject, $email_message,$job_id)
+    public function __construct($recever_email , $sender_email,$sender_password, $subject, $email_message,$job_id)
     {
         //
         $this->sender_email = $sender_email;
+        $this->sender_password = $sender_password;
+
         $this->recever_email = $recever_email;
         $this->subject = $subject;
         $this->email_message = $email_message;
@@ -49,6 +54,7 @@ class SendEmailJob implements ShouldQueue
     {
        $reciever_email = $this->recever_email;
        $sender_email = $this->sender_email;
+       $sender_password = $this->sender_password;
        $subject = $this->subject;
        $job_id = $this->job_id;
        $email_message = $this->email_message;
@@ -62,11 +68,16 @@ class SendEmailJob implements ShouldQueue
         }
         else{
             $data = array('email_subject'=> $subject , 'email_message' =>$email_message , 'url'=>$job_id);
+
+            $transport = new Swift_SmtpTransport('smtp.gmail.com', 587, 'tls');
+            $transport->setUsername($sender_email);
+            $transport->setPassword($sender_password);
+            $swift_mailer = new Swift_Mailer($transport);
+            Mail::setSwiftMailer($swift_mailer);
             Mail::send(['html'=>'emails.email_view'], $data, function($message) use($reciever_email , $sender_email, $subject ) {
                 $message->to($reciever_email, 'Sample Message')->subject
                 ($subject);
                 $message->from($sender_email,$sender_email);
-
             });
 
             $remaining_emails = $remaining_emails-1;

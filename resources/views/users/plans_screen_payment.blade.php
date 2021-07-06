@@ -1,16 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
-crossorigin="anonymous">
+
 
 
 
     <div class='pt-md-5'>
         <div class='col-md-3'></div>
-        <div class='col-md-6'>
+        <div class='col-md-6 '>
             <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
             <form accept-charset="UTF-8" action="/payment_single" class="require-validation"
                 data-cc-on-file="false"
@@ -20,13 +17,13 @@ crossorigin="anonymous">
 
                 <input type="hidden" name="amount" value="100">
                 <div class='form-row'>
-                    <div class='col-xs-12 form-group required'>
+                    <div class='col-12 form-group required'>
                         <label class='control-label'>Name on Card</label> <input
                             class='form-control' size='4' type='text'>
                     </div>
                 </div>
                 <div class='form-row'>
-                    <div class='col-xs-12 form-group required'>
+                    <div class='col-12 form-group required'>
                         <label class='control-label'>Card Number</label> <input
                             autocomplete='off' class='form-control card-number' size='20'
                             type='text'>
@@ -59,7 +56,7 @@ crossorigin="anonymous">
                         <button class=' btn btn-primary px-5 submit-button'
                             type='submit' >Pay »</button>
                             <button class=' total px-5 btn btn-info'>
-                            Total: <span class='amount'>50</span>
+                            Total: <span class='amount'><strong>$</strong> {{DB::table('package_subscriptions')->where('name' , 'Monthly')->pluck('amount')->first()}}</span>
                         </button>
                     </div>
                 </div>
