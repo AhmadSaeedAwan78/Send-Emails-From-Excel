@@ -20,16 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ae1066a-3931-44cb-89b6-a00e958e0b27" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/freshProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/freshProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/SendMailController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/SendMailController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Jobs/SendEmailJob.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Jobs/SendEmailJob.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/emails/email_view.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/emails/email_view.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/plans_screen_payment.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/plans_screen_payment.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/send_emails.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/send_emails.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +182,7 @@
       <workItem from="1624788260131" duration="24924000" />
       <workItem from="1624864364085" duration="3483000" />
       <workItem from="1625512921574" duration="9965000" />
-      <workItem from="1625592423278" duration="309000" />
+      <workItem from="1625592423278" duration="2020000" />
     </task>
     <servers />
   </component>
@@ -226,6 +218,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1624903992345" />
+    <state x="0" y="1" width="1366" height="618" key="MergeDialog" timestamp="1625602812294">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="0" y="1" width="1366" height="618" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1625602812294" />
+    <state x="321" y="125" key="MultipleFileMergeDialog" timestamp="1625602812325">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="321" y="125" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1625602812325" />
     <state x="526" y="125" key="refactoring.ChangeSignatureDialog" timestamp="1624792020343">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
