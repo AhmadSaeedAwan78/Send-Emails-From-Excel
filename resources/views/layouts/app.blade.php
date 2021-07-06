@@ -41,21 +41,43 @@
                 <i class="bx bx-menu" id="header-toggle"></i>
             </div>
             <div class="header_img">
+                @if(Auth::user()->image==null)
                 <img src="{{asset('images/users/dwayne-the-rock-.jpg')}}" alt="" />
+
+                @else
+                    <img src="{{asset('images/users/'.Auth::user()->image)}}" alt="" />
+                @endif
             </div>
         </header>
         <div>
             <a href="#" class="nav_logo">
                 <div class="nav_logo-name">
-                    <img
-                        id="navLogo"
-                        class="d-none"
-                        src="{{asset('images/users/dwayne-the-rock-.jpg')}}"
-                        alt="the rock"
-                    />
+                    @if(Auth::user()->image==null)
+                        <img id="navLogo" class="d-none" src="{{asset('images/users/dwayne-the-rock-.jpg')}}"
+                        alt="the rock"/>
+                        @else
+
+                            <img id="navLogo" class="d-none" src="{{asset('images/users/'.Auth::user()->image )}}"
+                            alt="the rock"/>
+                        @endif
+
                 </div>
             </a>
             <div class="nav_list">
+                @if (Auth::user()->is_admin ==1)
+                <a href="{{url('users-list')}}" class="py-2 nav_link ">
+                    <i class="bx bx-grid-alt nav_icon"></i>
+                    <span class="nav_name">Users</span>
+                </a>
+                <a href="settings" class="py-2 nav_link">
+                    <i class="bx bx-message-square-detail nav_icon"></i>
+                    <span class="nav_name">Settings</span>
+                </a>
+                <a href="logout" class="nav_link py-2">
+                    <i class="bx bx-log-out nav_icon"></i>
+                    <span class="nav_name">SignOut</span>
+                </a>
+               @else
                 <a href="{{url('send-emails')}}" class="py-2 nav_link active">
                     <i class="bx bx-grid-alt nav_icon"></i>
                     <span class="nav_name">Email</span>
@@ -64,11 +86,11 @@
                     <i class="bx bx-user nav_icon"></i>
                     <span class="nav_name">History</span>
                 </a>
-                <a href="settings.html" class="py-2 nav_link">
+                <a href="settings" class="py-2 nav_link">
                     <i class="bx bx-message-square-detail nav_icon"></i>
                     <span class="nav_name">Settings</span>
                 </a>
-                <a href="subscription.html" class="py-2 nav_link">
+                <a href="subscription" class="py-2 nav_link">
                     <i class="bx bx-bookmark nav_icon"></i>
                     <span class="nav_name">Subscription</span>
                 </a>
@@ -76,6 +98,7 @@
                     <i class="bx bx-log-out nav_icon"></i>
                     <span class="nav_name">SignOut</span>
                 </a>
+                @endif
             </div>
         </div>
     </nav>

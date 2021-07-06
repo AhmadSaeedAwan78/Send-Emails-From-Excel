@@ -15,6 +15,7 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Amount;
 use PayPal\Api\Details;
 use PayPal\Api\Item;
+use Carbon\Carbon;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
@@ -24,13 +25,14 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\Transaction;
 use Auth;
 
+
 class PaypalController extends Controller
 {
     private $_api_context;
-    
+
     public function __construct()
     {
-            
+
         $paypal_configuration = \Config::get('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_configuration['client_id'], $paypal_configuration['secret']));
         $this->_api_context->setConfig($paypal_configuration['settings']);
@@ -38,7 +40,7 @@ class PaypalController extends Controller
 
     public function payWithPaypal()
     {
-        return view('users.paymenttype');
+        return view('users.subscription');
     }
 
     public function postPaymentWithpaypal(Request $request)
@@ -73,16 +75,16 @@ class PaypalController extends Controller
         $payment->setIntent('Sale')
             ->setPayer($payer)
             ->setRedirectUrls($redirect_urls)
-            ->setTransactions(array($transaction));            
+            ->setTransactions(array($transaction));
         try {
             $payment->create($this->_api_context);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
             if (\Config::get('app.debug')) {
                 \Session::put('error','Connection timeout');
-                return Redirect::route('paymenttype');                
+                return Redirect::route('subscription');
             } else {
                 \Session::put('error','Some error occur, sorry for inconvenient');
-                return Redirect::route('paymenttype');                
+                return Redirect::route('subscription');
             }
         }
 
@@ -92,46 +94,78 @@ class PaypalController extends Controller
                 break;
             }
         }
-        
+
         Session::put('paypal_payment_id', $payment->getId());
 
-        if(isset($redirect_url)) {            
+        if(isset($redirect_url)) {
             return Redirect::away($redirect_url);
         }
 
         \Session::put('error','Unknown error occurred');
-    	return Redirect::route('paymenttype');
+    	return Redirect::route('subscription');
     }
 
     public function getPaymentStatus(Request $request)
-    {        
+    {
         $payment_id = Session::get('paypal_payment_id');
 
         Session::forget('paypal_payment_id');
         if (empty($request->input('PayerID')) || empty($request->input('token'))) {
             \Session::put('error','Payment failed');
-            return Redirect::route('paymenttype');
+            return Redirect::route('subscription');
         }
-        $payment = Payment::get($payment_id, $this->_api_context);        
+        $payment = Payment::get($payment_id, $this->_api_context);
         $execution = new PaymentExecution();
-        $execution->setPayerId($request->input('PayerID'));        
+        $execution->setPayerId($request->input('PayerID'));
         $result = $payment->execute($execution, $this->_api_context);
-       
-        if ($result->getState() == 'approved') {  
+
+        if ($result->getState() == 'approved') {
+            $trial_exp_date = Carbon::now()->addMonth(1);
+
+            $expiry=$trial_exp_date ->toDateTimeString();
+
+            $check= DB::table('purchased_plans')->where('user_id',Auth::user()->id)->first();
+        $amount=DB::table('package_subscriptions')->where('name','Monthly')->pluck('amount')->first();
+            if($check==null){
+            DB::table('purchased_plans')->insert([
+                'plan_id' => 1,
+                'user_id' => Auth::user()->id,
+                'stripe_charge_id' => $result->id,
+                    'amount' => $amount,
+                    'plan_type' => 'Paypal',
+                    'expirey_date' => $expiry
+            ]);
+
             DB::table('users')
             ->where('id', Auth::user()->id)
             ->update([
                 'package_status' => 1,
                 'stripe_connect_id'=>$result->id
         ]);
-            
+    }
+    else{
+        DB::table('purchased_plans')->where('user_id',Auth::user()->id)->update([
+
+            'stripe_charge_id' => $result->id,
+                'amount' => $amount,
+                'plan_type' => 'Paypal',
+                'expirey_date' => $expiry
+        ]);
+
+        DB::table('users')
+        ->where('id', Auth::user()->id)
+        ->update([
+            'package_status' => 1,
+            'stripe_connect_id'=>$result->id
+    ]);
+    }
             \Session::put('success','Payment success !!');
 
 
-            return Redirect::route('paymenttype');
+            return Redirect::route('subscription');
         }
 
         \Session::put('error','Payment failed !!');
-		return Redirect::route('paymenttype');
+		return Redirect::route('subscription');
     }
 }

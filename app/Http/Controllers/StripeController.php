@@ -67,67 +67,44 @@ public function save_transaction(Request $request){
 
     Stripe::setApiKey(config('services.stripe.secret'));
 
-    // $customer = \Stripe\Customer::create([
-    //     'source' => $request->stripeToken,
-    //     'email' => Auth::user()->email,
+    $customer = \Stripe\Customer::create([
+        'source' => $request->stripeToken,
+        'email' => Auth::user()->email,
 
-    // ]);
-
-    //    $trial_exp_date = Carbon::now()->addMonth(1);
-    //    $trail_end=strtotime($trial_exp_date);
-    //    if($request->plan_id ==1){
-    // $subscription = Subscription::create([
-    //         'customer' => $customer->id,
-    //         'items' => [
-    //           [
-    //             'price' => 'price_1J5bBNEHe3fYaiqPjYvNor70',
-    //           ],
-    //         ],
-    //         'trial_end' => $trail_end,
-    //     ]);
-    //    }
-    //    else{
-    //         $subscription = Subscription::create([
-    //         'customer' => $customer->id,
-    //         'items' => [
-    //           [
-    //             'price' => 'price_1J5b9MEHe3fYaiqPJzf5hTkE',
-    //           ],
-    //         ],
-    //         'trial_end' => $trail_end,
-    //     ]);
-    //    }
-
-
-
-    $charge = Charge::create([
-        'amount' => self::toStripeFormat($amount),
-        'currency' => 'usd',
-        "source" => $request->stripeToken, // obtained with Stripe.js
-        "description" => "Subscription Bought"
     ]);
-    $trial_exp_date = Carbon::now()->addMonth(1);
 
-        $expirey_date = $trial_exp_date->toDateTimeString();
+        $trial_exp_date = Carbon::now()->addMonth(1);
+        $trail_end=strtotime($trial_exp_date);
 
-        if($charge){
+     $subscription = Subscription::create([
+             'customer' => $customer->id,
+             'items' => [
+               [
+                 'price' => 'price_1JAClmIGbfgby5YXV6kG64WA',
+               ],
+             ],
+             'trial_end' => $trail_end,
+         ]);
 
+
+        if($subscription){
+            $expirey_date = date("Y-m-d H:i:s", $subscription->trial_end);
 
         DB::table('purchased_plans')->insert([
             'plan_id' => 1,
             'user_id' => Auth::user()->id,
-            'stripe_charge_id' => $charge->id,
-            'amount' => $request->amount,
-            'plan_type' => $charge->object,
-            'expirey_date' => $expirey_date
+            'stripe_charge_id' => $subscription->id,
+                'amount' => $subscription->plan->amount,
+                'plan_type' => 'Stripe',
+                'expirey_date' => $expirey_date
         ]);
         DB::table('users')
         ->where('id', Auth::user()->id)
         ->update(['package_status' => 1]);
 
-        return redirect('paymenttype')->with('success', 'Payment is Successfull');
+        return redirect('subscription')->with('message', 'Payment is Successfull');
     } else {
-        return redirect('paymenttype')->with('error', 'Payment is not successfull');
+        return redirect('subscription')->with('error', 'Payment is not successfull');
     }
 
 }

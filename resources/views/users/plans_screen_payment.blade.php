@@ -6,8 +6,6 @@ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
 crossorigin="anonymous">
 
-
-
     <div class='pt-md-5'>
         <div class='col-md-3'></div>
         <div class='col-md-6'>
@@ -17,8 +15,10 @@ crossorigin="anonymous">
                 data-stripe-publishable-key="pk_test_51J7cw6IGbfgby5YXwJO1pa4fmUQakZoeUyheNrnhh5e3mhYMAIn8ICWEXzBvGDAxkMn5EZubtQy0ufEtJmtKqdXX00TWaoflsa"
                 id="payment-form" method="POST">
                 {{ csrf_field() }}
-
-                <input type="hidden" name="amount" value="100">
+<?php
+    $amount=DB::table('package_subscriptions')->where('name','Monthly')->pluck('amount')->first();
+     ?>
+     <input type="hidden" name="amount" value="{{ $amount }}">
                 <div class='form-row'>
                     <div class='col-xs-12 form-group required'>
                         <label class='control-label'>Name on Card</label> <input
@@ -57,10 +57,8 @@ crossorigin="anonymous">
                 <div class='form-row mt-4'>
                     <div class='col-md-12 text-center form-group'>
                         <button class=' btn btn-primary px-5 submit-button'
-                            type='submit' >Pay »</button>
-                            <button class=' total px-5 btn btn-info'>
-                            Total: <span class='amount'>50</span>
-                        </button>
+                            type='submit' >Pay $ {{ $amount }}</button>
+
                     </div>
                 </div>
 

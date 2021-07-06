@@ -36,7 +36,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                     {!! $message !!}
                 </div>
-                <?php Session::forget('success');?>
+
                 @endif
 
                 @if ($message = Session::get('error'))
@@ -44,7 +44,7 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
                     {!! $message !!}
                 </div>
-                <?php Session::forget('error');?>
+
                 @endif
         <div style="display: flex;
         align-items: baseline;
